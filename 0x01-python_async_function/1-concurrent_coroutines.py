@@ -2,17 +2,13 @@
 """ The basics of async """
 
 from typing import List
-import time
 
-wait_n = __import__('1-concurrent_coroutines').wait_n
+wait_random = __import__('0-basic_async_syntax').wait_random
 
-
-async def measure_time(n: int, max_delay: int) -> float:
+async def wait_n(n: int, max_delay: int) -> List[float]:
     """ random """
-    start = time()
-    
-    wait_n(n, max_delay)
-    
-    end = time()
-
-    return end - start
+    runs: list = []
+    for i in range(n):
+        runs.append(await wait_random(max_delay))
+        
+    return sorted(runs)
